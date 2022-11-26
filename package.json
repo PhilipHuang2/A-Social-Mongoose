@@ -1,0 +1,19 @@
+{
+  "name": "a-social-mongoose",
+  "version": "1.0.0",
+  "description": "creating a API endpoints for a social media application using a mongodb database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilipHuang2/A-Social-Mongoose.git"
+  },
+  "author": "Philip Huang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PhilipHuang2/A-Social-Mongoose/issues"
+  },
+  "homepage": "https://github.com/PhilipHuang2/A-Social-Mongoose#readme"
+}
