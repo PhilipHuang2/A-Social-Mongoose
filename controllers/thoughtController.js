@@ -9,7 +9,17 @@ module.exports = {
   }) .catch((err) => res.status(500).json(err));
     },
 
-  getSingleThought(req, res) {},
+  getSingleThought(req, res) {
+    console.log("entering getSingleThought")
+    Thought.find({_id: req.params.thoughtId})
+    .select('-__v')
+    .then((Thought) =>
+        !Thought
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : res.json(Thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
   postThought(req, res) {
     console.log("entering postThought");
     User.findOne({ _id: req.body.userId })
@@ -30,7 +40,13 @@ module.exports = {
     })
       .catch((err) => res.status(500).json(err));
   },
-  updateThought(req, res) {},
+  updateThought(req, res) {
+    console.log("Entering updateThought");
+    Thought.findByIdAndUpdate({ _id: req.params.thoughtId }, req.body, {new:true})
+        .then((thought)=>{
+          thought ? res.json(thought) :  res.status(404).json({ message: 'No user with that ID' })
+        })
+  },
   deleteThought(req, res) {},
   addReaction(req, res) {},
   deleteReaction(req, res) {},
