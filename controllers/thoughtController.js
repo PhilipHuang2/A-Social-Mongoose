@@ -47,7 +47,11 @@ module.exports = {
           thought ? res.json(thought) :  res.status(404).json({ message: 'No user with that ID' })
         })
   },
-  deleteThought(req, res) {},
-  addReaction(req, res) {},
+  deleteThought(req, res) {
+    console.log("Entering deleteThought");
+  },
+  addReaction(req, res) {
+    
+  },
   deleteReaction(req, res) {},
 };

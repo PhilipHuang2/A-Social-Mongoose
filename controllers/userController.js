@@ -35,6 +35,7 @@ module.exports = {
         })
     }, 
     deleteUser(req,res){
+      console.log("Entering deleteUser")
       User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>{
         if(!user){
@@ -51,7 +52,19 @@ module.exports = {
       // .catch((err) => res.status(500).json(err));
     },
     addFriend(req,res){
-
+        console.log("entering addFriend")
+        User.findOne({_id: req.params.friendId})
+        .select("-__v")
+        .then((friend)=>{
+          if(!friend)
+            res.status(404).json({ message: "No friend with that ID" });
+          else{
+            User.findOneAndUpdate({_id: req.params.userId}, {$push: {friends: friend}}, {new:true})
+            .then((user)=>{
+              user ? res.json(user) :  res.status(404).json({ message: 'No user with that ID' })
+            })
+          }
+        })
     },
     deleteFriend(req,res){
 
