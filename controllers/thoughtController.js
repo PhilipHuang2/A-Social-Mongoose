@@ -49,9 +49,24 @@ module.exports = {
   },
   deleteThought(req, res) {
     console.log("Entering deleteThought");
+    Thought.findOneAndDelete({ _id: req.params.thoughtId })
+    .then((thought) =>{
+      if(!thought){
+        res.status(404).json({ message: 'No thought with that ID' })
+        return;
+      }
+      else{
+        User.updateOne({username: thought.username}, {$pullAll:{thoughts: [{_id: req.params.thoughtId}]}}, {new:true})
+        .then((user)=>{
+            user? res.json({message: "Deleted thought and removed it from its user"}) : res.status(404).json({ message: 'No user with that ID' })
+        })
+      }
+    })
   },
   addReaction(req, res) {
-    
+
   },
-  deleteReaction(req, res) {},
+  deleteReaction(req, res) {
+
+  },
 };
