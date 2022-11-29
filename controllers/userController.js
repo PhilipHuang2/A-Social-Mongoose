@@ -67,7 +67,20 @@ module.exports = {
         })
     },
     deleteFriend(req,res){
-
+      console.log("entering deleteFriend")
+      User.findOne({_id: req.params.friendId})
+      .select("-__v")
+      .then((friend)=>{
+        if(!friend){
+          res.status(404).json({ message: "No friend with that ID" });
+        }
+        else {
+          User.updateOne({_id: req.params.userId}, {$pullAll: {friends: [{_id: req.params.friendId}]},}, {new:true})
+            .then((user)=>{
+              user ? res.json(user) :  res.status(404).json({ message: 'No user with that ID' })
+            })
+        }
+      })
     },
 
 };
