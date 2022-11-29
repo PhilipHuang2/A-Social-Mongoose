@@ -28,7 +28,10 @@ module.exports = {
     }, 
     putUser(req,res){
         console.log("Entering putUser");
-        User.findByIdAndUpdate({ _id: req.params.userId })
+        User.findByIdAndUpdate({ _id: req.params.userId }, req.body, {new:true})
+        .then((user)=>{
+          user ? res.json(user) :  res.status(404).json({ message: 'No user with that ID' })
+        })
     }, 
     deleteUser(req,res){
 
