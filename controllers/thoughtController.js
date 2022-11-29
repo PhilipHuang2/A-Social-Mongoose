@@ -64,9 +64,36 @@ module.exports = {
     })
   },
   addReaction(req, res) {
+    console.log("Entering addReaction")
+    Thought.findOne({ _id: req.params.thoughtId })
+    .then((thought) =>{
+        if(!thought){
+          res.status(404).json({ message: 'No thought with that ID' })
+          return;
+        }
+        else{
+            thought.reactions.push({reactionBody: req.body.reactionBody, username: req.params.thoughtId});
+            thought.save();
+            res.json(thought);
+        }
+        
+    })
 
   },
   deleteReaction(req, res) {
-
+    console.log("Entering deleteReaction")
+    Thought.findOne({ _id: req.params.thoughtId })
+    .then((thought) =>{
+        if(!thought){
+          res.status(404).json({ message: 'No thought with that ID' })
+          return;
+        }
+        else{
+            thought.reactions.id(req.params.reactionId).remove();
+            thought.save();
+            res.json(thought);
+        }
+        
+    })
   },
 };
