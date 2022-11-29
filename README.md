@@ -17,6 +17,9 @@ I have however happy to have learn MongoDB, it sounds useful for my other projec
 
 # Sample Video
 
+Functionality Video:
+https://drive.google.com/file/d/1IyHSQx0ftk27ZdCMfKKDArsOpn7xzmIx/view
+
 # License
 
 This project is covered under the MIT License.
